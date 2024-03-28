@@ -1,24 +1,39 @@
-# BeansBooks Unit Tests
+[
+  ACH.LOOKUP
+]
 
-Planning for unit test implementation.  Any suggested use cases should be added to this document with a pull request.
 
-Base off of an installed and initialized database with the following:
+TARGET=ACHITEM
 
-User: user@test.beansbooks / beansbooks
+DEFINE
+  STARTDATE = DATE
+  ENDDATE = DATE
+END
 
-API: api@test.beansbooks / [ID] / [KEY]
+SETUP
+  STARTDATE = DATEREAD("Enter Start Date")
+  ENDDATE = DATEREAD("Enter End Date")
+END
 
-## Beans_Account
+SELECT
+  (ACHITEM:COMPANYID = "" OR ACHITEM:COMPANYID = "" )
+  (ACHITEM:TRANPOSTDATE >= STARTDATE AND
+  ACHITEM:TRANPOSTDATE <= ENDDATE)
+END
 
-### Beans_Account_Transaction_Create
+PRINT TITLE="ACH ITEMS"
 
-### Beans_Account_Transaction_Delete
+  HEADERS
+    CALL PRINTHEADERS
+  END
 
-### Beans_Account_Transaction_Update
+  CALL GETACHITEMS
+END 
 
-### Beans_Account_Transaction_Lookup
+PROCEDURE GETACHITEMS
 
-### Beans_Account_Transaction_Match
-
-### Beans_Account_Transaction_Search
-
+  FOR ACHITEM WITH ACHITEM:COMPANYID = "" OR ACHITEM:COMPANYID = ""
+  DO
+  	
+  END
+END
